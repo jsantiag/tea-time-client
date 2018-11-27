@@ -4,3 +4,18 @@ body {
   font-family: sans-serif;
 
 }
+body * {
+  box-sizing: border-box;
+}
+
+
+ul {
+  list-style: none;
+}
+
+.tea-list-elements {
+  border: 1px solid black;
+  width: 20%;
+  height: 10%;
+  text-align: center;
+}
