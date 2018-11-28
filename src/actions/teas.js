@@ -15,7 +15,20 @@ export const fetchTeasError = (err) => ({
   type: FETCH_TEAS_ERROR,
   err
 });
+export const SHOW_MORE_INFO = 'SHOW_MORE_INFO'
+export const showMoreInfo = (teaId) => (
+  {
+    type: SHOW_MORE_INFO,
+    teaId
+  });
 
+export const LAST_TEA_RETURN = 'LAST_TEA_RETURN'
+export const lastTeaReturn = (lastTea) => (
+  {
+    type: LAST_TEA_RETURN,
+    lastTea
+  }
+);
 
 export const fetchTeas = () => (dispatch) => {
   dispatch(fetchTeasRequest());

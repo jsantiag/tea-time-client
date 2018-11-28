@@ -1,21 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
-import {fetchTeas} from '../actions/teas';
+import {fetchTeas, showMoreInfo} from '../actions/teas';
+import { addTeaToUser } from '../actions/users';
 
 export class TeaList extends React.Component {
     componentDidMount() {
-        this.props.dispatch(fetchTeas());  
-        console.log(this.props);
+      this.props.dispatch(fetchTeas());
+    }
 
+    moreInfo(teaId){
+      this.props.dispatch(showMoreInfo(teaId));
+    }
+
+    timerRedirect(teaType){
+        this.props.dispatch(addTeaToUser(teaType));
+        // return <Redirect to="/tea-timer" />;(this works only within render());
+        this.props.history.push('/tea-timer'); 
     }
 
     render() {
-        console.log(this.props.teas);
         const teasList = this.props.teas.map((tea, i)=>
-          <div className="tea-list-elements">
-            <li key={i}>{tea.teaType}</li>
-          </div>
+            <li key={i}>
+                <span onClick={e => this.moreInfo(tea.id)}>{tea.teaType}</span>
+                {tea.moreInfo && <div className="tempRec">{tea.tempRec}</div>}
+                {tea.moreInfo && <div className="steepRec">{tea.steepTimeRec}</div>}
+                {tea.moreInfo && <button onClick={e => this.timerRedirect(tea.teaType)}>select this tea</button>}
+            </li>
           
     );
         return (
@@ -37,8 +48,10 @@ const mapStateToProps = state => {
     return {
         username: state.auth.currentUser.username,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
-        teas: state.teasReducer.teas
+        teas: state.teasReducer.teas 
+        //moreinfo 
     };
 };
 
 export default requiresLogin()(connect(mapStateToProps)(TeaList));
+
