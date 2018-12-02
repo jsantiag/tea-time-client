@@ -13,6 +13,27 @@ export class TeaList extends React.Component {
       this.props.dispatch(showMoreInfo(teaId));
     }
 
+    steepRecLookup(steep){
+        if (steep.length > 1){
+            for(let i = 0; i < steep.length; i++){
+                return `${steep[i]}-${steep[i+1]} minutes`; 
+            }
+        } else {
+            return `${steep[0]} minutes`; 
+        }
+
+    }
+
+    steepTempLookup(temp){
+        if (temp.length > 1){
+            for(let i = 0; i < temp.length; i++){
+                return `${temp[i]}-${temp[i+1]} degrees`; 
+            }
+        } else {
+            return `${temp[0]} degrees`;
+        }
+    }
+
     timerRedirect(teaType){
         this.props.dispatch(addTeaToUser(teaType));
         // return <Redirect to="/tea-timer" />;(this works only within render());
@@ -23,8 +44,8 @@ export class TeaList extends React.Component {
         const teasList = this.props.teas.map((tea, i)=>
             <li key={i}>
                 <span onClick={e => this.moreInfo(tea.id)}>{tea.teaType}</span>
-                {tea.moreInfo && <div className="tempRec">{tea.tempRec}</div>}
-                {tea.moreInfo && <div className="steepRec">{tea.steepTimeRec}</div>}
+                {tea.moreInfo && <div className="tempRec">{this.steepTempLookup(tea.tempRec)}</div>}
+                {tea.moreInfo && <div className="steepRec">{this.steepRecLookup(tea.steepTimeRec)}</div>}
                 {tea.moreInfo && <button onClick={e => this.timerRedirect(tea.teaType)}>select this tea</button>}
             </li>
           

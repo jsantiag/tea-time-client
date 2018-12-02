@@ -42,13 +42,14 @@ export const addTeaToUser = teaType => (dispatch, getState) => {
          return dispatch(lastTeaErr(res))
      } 
     })
-    .then(res => dispatch(addLastTea(res)))
+    .then((res) => { dispatch(addLastTea(res))
+    })
     .catch(err => dispatch(lastTeaErr(err)))
     
 }; 
 
 export const ADD_LASTTEA = 'ADD_LASTTEA'; 
-const addLastTea = (lastTea) => ({
+export const addLastTea = (lastTea) => ({
     type: ADD_LASTTEA, 
     lastTea
 });

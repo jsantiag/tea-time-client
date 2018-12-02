@@ -44,7 +44,7 @@ export default function teasReducer(state = initialState, action) {
     });
   } else if(action.type === ADD_LASTTEA){
     return Object.assign({}, state, {
-      lastTea:action.lastTea.teaType
+      lastTea: action.lastTea
     });
   }else if(action.type === LASTTEA_ERR){
     return Object.assign({},state,{
