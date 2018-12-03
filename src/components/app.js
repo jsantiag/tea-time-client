@@ -38,7 +38,7 @@ export class App extends React.Component {
 
         clearInterval(this.refreshInterval);
     }
-
+ 
     render() {
         return (
             <div className="app">
