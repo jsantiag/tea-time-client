@@ -3,42 +3,52 @@ import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchTeas} from '../actions/teas';
 import {addLastTea} from '../actions/users';
-const prettyMs = require('pretty-ms');
+// const prettyMs = require('pretty-ms');
 
 export class TeaTimer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputTimerVal: 0, 
-      spillCount:0, 
-      timerOn: false,
-      timerStart: 0
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     timerVal: 0, 
+  //     // spillCount:0, 
+  //     // timerOn: false,
+  //     // timeRemaining:0,
+  //   };
+  // }
 
   componentDidMount() {
     this.props.dispatch(fetchTeas());  
     this.props.dispatch(addLastTea());  
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-    const value = this.input.value;
-    this.setState({inputTimerVal:value});
-    this.startTimer();
-    console.log(this.state);
-  }
+  // onSubmit(event) {
+  //   event.preventDefault();
+  //   // this.setTimer();
+  //   // console.log(this.state);
+  // }
 
-  startTimer() {
-    this.setState({
-      inputTimerVal: this.state.inputTimerVal,
-      timerStart: Date.now() - this.state.inputTimerVal,
-      timerOn: true
-    })
-   console.log(prettyMs(this.state.inputTimerVal)); 
-   console.log(prettyMs(this.state.timerStart));
-  }
-  
+  // setTimer(){
+  //   this.setState({
+  //     timerOn: true,
+  //     timerVal:(parseInt((this.input.value)*60*1000)),
+  //     start: Date.now()-this.state.timerVal,
+  //   })
+  //   setInterval(()=> this.setState({
+  //     timeRemaining: Date.now()-this.state.start
+  //   }), 1);
+  //   console.log(this.state.timeRemaining);
+  // }
+//q on line 37, what do you set the interval on? 
+//set timer action --
+//set state vals: timerVal = userInput , timerOn = true, timeRemaining: -setInterval- 
+//timer is on when time remaining > 0
+//timer is off when time remaining = 0 or if timerVal = 0 
+//timeRemaining should decrement by one second 
+//timerVal is converted to minutes
+
+//local should be reserved for static components 
+
+
 
  tempRecsLookUp(currentTeaType){
   let currentTea = this.props.teas.find(obj => obj.teaType === currentTeaType);

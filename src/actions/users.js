@@ -60,6 +60,12 @@ const lastTeaErr = (err) => ({
     err
 });
 
+// export const SET_TIMER = 'SET_TIMER'; 
+// export const setTimer = (inputTimerVal) => ({
+//     type: SET_TIMER,
+//     inputTimerVal
+// })
+
 
 export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dispatch, getState) => {
     const state = getState();
