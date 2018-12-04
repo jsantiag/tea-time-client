@@ -22,13 +22,18 @@ export const showMoreInfo = (teaId) => (
     teaId
   });
 
-export const LAST_TEA_RETURN = 'LAST_TEA_RETURN'
-export const lastTeaReturn = (lastTea) => (
-  {
-    type: LAST_TEA_RETURN,
-    lastTea
-  }
-);
+export const POST_CUSTOM_TEA = 'POST_CUSTOM_TEA'; 
+export const postCustomTea = (customTea) => ({
+  type: POST_CUSTOM_TEA,
+  customTea
+})
+
+export const CUSTOM_TEA_ERR = 'CUSTOM_TEA_ERR';
+const customTeaErr = (err) => ({
+    type: CUSTOM_TEA_ERR,
+    err
+});
+
 
 export const fetchTeas = () => (dispatch) => {
   dispatch(fetchTeasRequest());
@@ -37,3 +42,21 @@ export const fetchTeas = () => (dispatch) => {
       .then(teas => dispatch(fetchTeasSuccess(teas)))
       .catch(err => dispatch(fetchTeasError(err)));
 };
+
+export const addCustomToTeaList = (teaType) => (dispatch) => {
+  dispatch(postCustomTea(teaType)); 
+  return fetch(`${API_BASE_URL}/teas`, {
+    method: 'POST',
+    headers: {
+      'content-type':'application/json'
+    }, 
+    body: JSON.stringify({teaType})
+  }).then(res => {
+    if(res.ok){
+      return res.json()
+    }else{
+      return dispatch(customTeaErr(res))
+    }
+  })
+  .then((res) => dispatch(fetchTeas(res)))
+}

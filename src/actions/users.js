@@ -48,6 +48,8 @@ export const addTeaToUser = teaType => (dispatch, getState) => {
     
 }; 
 
+
+
 export const ADD_LASTTEA = 'ADD_LASTTEA'; 
 export const addLastTea = (lastTea) => ({
     type: ADD_LASTTEA, 
@@ -60,11 +62,20 @@ const lastTeaErr = (err) => ({
     err
 });
 
-// export const SET_TIMER = 'SET_TIMER'; 
-// export const setTimer = (inputTimerVal) => ({
-//     type: SET_TIMER,
-//     inputTimerVal
-// })
+export const SET_TIMER = 'SET_TIMER'; 
+export const setTimer = (timerInput) => ({
+    type: SET_TIMER,
+    timerInput
+});
+
+export const SET_TIME_LEFT = 'SET_TIME_LEFT';
+export const setTimeLeft = (timeLeft) => ({
+    type: SET_TIME_LEFT, 
+    timeLeft
+});
+
+
+
 
 
 export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dispatch, getState) => {
@@ -81,41 +92,3 @@ export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dis
 
 
 
-// export const ADD_CURRENT_TEA = 'ADD_CURRENT_TEA'; 
-// export const addCurrentTea = (teaId) => ({
-//     type: ADD_CURRENT_TEA,
-//     teaId
-// }); 
-
-// export const FETCH_USER_REQUEST  = 'FETCH_USER_REQUEST'; 
-// export const fetchUserRequest = () => ({
-//     type: FETCH_USER_REQUEST
-// });
-
-// export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
-// export const fetchUserSuccess = (user) => ({
-//     type: FETCH_USER_SUCCESS,
-//     user
-// });
-
-// export const FETCH_USER_ERROR = 'FETCH_USER_SUCCESS';
-// export const fetchUserError = (err) => ({
-//     type: FETCH_USER_ERROR,
-//     err
-// });
-
-
-
-
-// export const fetchUser = () => (dispatch, getState) => {
-//     const state = getState();
-//     dispatch(fetchUserRequest());
-//     return fetch(`${API_BASE_URL}/users/:id`,{
-//         method: 'GET',
-//         headers: {
-//             'content-type':'application/json'
-//         }, 
-//         body: JSON.stringify({id:state.auth.currentUser._id})
-        
-//     })
-// }

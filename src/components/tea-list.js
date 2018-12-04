@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
-import {fetchTeas, showMoreInfo} from '../actions/teas';
+import {fetchTeas, showMoreInfo, addCustomToTeaList} from '../actions/teas';
 import { addTeaToUser } from '../actions/users';
 
 export class TeaList extends React.Component {
@@ -10,11 +10,14 @@ export class TeaList extends React.Component {
     }
 
     moreInfo(teaId){
+ 
       this.props.dispatch(showMoreInfo(teaId));
     }
 
     steepRecLookup(steep){
-        if (steep.length > 1){
+        if (steep[0] === undefined){
+            return ``;
+        }else if (steep.length > 1){
             for(let i = 0; i < steep.length; i++){
                 return `${steep[i]}-${steep[i+1]} minutes`; 
             }
@@ -25,7 +28,9 @@ export class TeaList extends React.Component {
     }
 
     steepTempLookup(temp){
-        if (temp.length > 1){
+        if (temp[0] === undefined){
+            return ``;
+        }else if (temp.length > 1){
             for(let i = 0; i < temp.length; i++){
                 return `${temp[i]}-${temp[i+1]} degrees`; 
             }
@@ -40,6 +45,18 @@ export class TeaList extends React.Component {
         this.props.history.push('/tea-timer'); 
     }
 
+    handleCustomClick(){
+        console.log('handleCustomClick triggered');
+        this.props.dispatch({type:'setCustom'});
+    }
+
+    handleSaveCustom(event){
+        event.preventDefault();
+        console.log(this.input.value);
+        this.props.dispatch(addCustomToTeaList(this.input.value));
+        this.props.dispatch({type: 'resetCustom'}); 
+    }
+
     render() {
         const teasList = this.props.teas.map((tea, i)=>
             <li key={i}>
@@ -48,6 +65,9 @@ export class TeaList extends React.Component {
                 {tea.moreInfo && <div className="steepRec">{this.steepRecLookup(tea.steepTimeRec)}</div>}
                 {tea.moreInfo && <button onClick={e => this.timerRedirect(tea.teaType)}>select this tea</button>}
             </li>
+       
+
+        
           
     );
         return (
@@ -59,6 +79,18 @@ export class TeaList extends React.Component {
                     your tea list: 
                     <ul>{teasList}</ul>
                 </div>
+                <div className="create-new-tea">
+                    <button onClick={e => this.handleCustomClick()}>create custom tea</button>
+                </div>
+                {this.props.customOn === true ? <div className="customInputForm">
+                <form onSubmit={e => this.handleSaveCustom(e)}>
+                    <label>Custom tea name:</label>
+                    <input type='text' className="custom-tea-input" ref={input =>(this.input = input)}></input>
+                    <button type='submit' name= "submit" className="customSubmit">
+                    Save Custom
+                    </button>
+                </form>
+                </div> : null}
             </div>
         );
     }
@@ -69,8 +101,8 @@ const mapStateToProps = state => {
     return {
         username: state.auth.currentUser.username,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
-        teas: state.teasReducer.teas 
-        //moreinfo 
+        teas: state.teasReducer.teas, 
+        customOn: state.teasReducer.customOn
     };
 };
 

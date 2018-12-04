@@ -2,7 +2,7 @@ import {
   FETCH_TEAS_REQUEST, 
   FETCH_TEAS_SUCCESS,
   FETCH_TEAS_ERROR,
-  SHOW_MORE_INFO
+  SHOW_MORE_INFO 
 } from '../actions/teas';
 import {ADD_LASTTEA,LASTTEA_ERR} from '../actions/users'; 
 
@@ -10,7 +10,8 @@ const initialState = {
   teas: [],
   loading: false,
   error: null,
-  lastTea: null
+  lastTea: null, 
+  customOn: false
 };
 
 export default function teasReducer(state = initialState, action) {
@@ -24,9 +25,7 @@ export default function teasReducer(state = initialState, action) {
     return Object.assign({}, state, {
         loading: false,
         error: null,
-        teas: action.teas,
-        // lastTea: action.lastTea
-        
+        teas: action.teas,        
     });
   } else if (action.type === FETCH_TEAS_ERROR) {
       return Object.assign({}, state, {
@@ -51,10 +50,16 @@ export default function teasReducer(state = initialState, action) {
       lastTea: null, 
       error: action.err
     })
+  }else if(action.type === 'setCustom'){
+    console.log('action recieved in reducer');
+    return Object.assign({}, state, {
+      customOn:true
+    })
+  }else if(action.type === 'resetCustom'){
+    return Object.assign({}, state , {
+      customOn:false
+    })
   }
-
-
   return state;
 }
 
-//trigger success action, use that to populate currentTea prop in reducer 
