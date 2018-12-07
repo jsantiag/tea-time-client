@@ -1,0 +1,28 @@
+@media only screen and (max-width : 375px) {
+img{
+  max-width: 350px;
+  height:auto;
+}
+} 
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    img{
+      max-width: 320px;
+      height:auto;
+    } 
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    img{
+      max-width: 320px;
+      height:auto;
+    }
+}

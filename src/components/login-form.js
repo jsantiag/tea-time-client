@@ -3,6 +3,7 @@ import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {login} from '../actions/auth';
 import {required, nonEmpty} from '../validators';
+import './login-form.css'
 
 export class LoginForm extends React.Component {
     onSubmit(values) {
@@ -24,26 +25,34 @@ export class LoginForm extends React.Component {
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
+                <div className="login-fields-container">
                 {error}
-                <label htmlFor="username">Username</label>
+                <div className="username-container">
+                <label htmlFor="username">Username:</label>
                 <Field
                     component={Input}
                     type="text"
                     name="username"
                     id="username"
+                    placeholder="username"
                     validate={[required, nonEmpty]}
                 />
-                <label htmlFor="password">Password</label>
+                </div>
+                <div className="password-container">
+                <label htmlFor="password">Password:</label>
                 <Field
                     component={Input}
+                    placeholder="password"
                     type="password"
                     name="password"
                     id="password"
                     validate={[required, nonEmpty]}
                 />
+                </div>
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Log in
                 </button>
+                </div>
             </form>
         );
     }

@@ -1,0 +1,16 @@
+
+.header-elements{
+  justify-content: space-between;
+  width:100%;
+  height: 10%;
+}
+
+.header-elements > h1 {
+  display:inline-block;
+  color:#2e4c38;
+}
+
+.header-elements > button{
+  float:right;
+  vertical-align: middle;
+}

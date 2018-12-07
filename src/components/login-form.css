@@ -1,0 +1,119 @@
+/*desktop/laptop*/
+@media only screen  and (min-width : 1224px) {
+
+.login-form{
+  width:100%;
+}
+
+input[type=text], input[type=password] {
+padding: 0;
+height: 30px;
+outline: none;
+border: 1px solid #cdcdcd;
+border-color: rgba(0, 0, 0, .15);
+background-color: white;
+font-size: 16px;
+cursor: pointer; 
+}
+
+button:hover{
+  background-color: #2e4c38;
+  color: white;
+}
+
+label {
+  color: #2e4c38;
+  font-weight: bold;
+  display: inline;
+  }
+
+  .username-container, .password-container {
+    padding-bottom: 20px;
+  }
+
+  .login-fields-container{
+    justify-content: center;
+
+  }
+
+}
+
+
+/*ipads/tablets */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+
+  .login-form{
+    width:100%;
+  }
+  
+  input[type=text], input[type=password] {
+  padding: 0;
+  height: 30px;
+  outline: none;
+  border: 1px solid #cdcdcd;
+  border-color: rgba(0, 0, 0, .15);
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer; 
+  }
+  
+  button:hover{
+    background-color: #2e4c38;
+    color: white;
+  }
+  
+  label {
+    color: #2e4c38;
+    font-weight: bold;
+    display: inline;
+    }
+  
+    .username-container, .password-container {
+      padding-bottom: 20px;
+    }
+  
+    .login-fields-container{
+      justify-content: center;
+  
+    }
+  
+  }
+
+
+  @media only screen and (max-width : 375px) {
+    .login-form{
+      max-width:360px;
+      margin:auto;
+    }
+    
+    input[type=text], input[type=password] {
+    padding: 0;
+    height: 30px;
+    outline: none;
+    border: 1px solid #cdcdcd;
+    border-color: rgba(0, 0, 0, .15);
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer; 
+    }
+    
+    button:hover{
+      background-color: #2e4c38;
+      color: white;
+    }
+    
+    label {
+      color: #2e4c38;
+      font-weight: bold;
+      display: inline;
+      }
+    
+      .username-container, .password-container {
+        padding-bottom: 20px;
+      }
+    
+      .login-fields-container{
+        justify-content: center;
+    
+      }
+    }

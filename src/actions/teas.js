@@ -43,14 +43,14 @@ export const fetchTeas = () => (dispatch) => {
       .catch(err => dispatch(fetchTeasError(err)));
 };
 
-export const addCustomToTeaList = (teaType) => (dispatch) => {
+export const addCustomToTeaList = (teaType, tempRec, steepTimeRec ) => (dispatch) => {
   dispatch(postCustomTea(teaType)); 
   return fetch(`${API_BASE_URL}/teas`, {
     method: 'POST',
     headers: {
       'content-type':'application/json'
     }, 
-    body: JSON.stringify({teaType})
+    body: JSON.stringify({teaType, tempRec, steepTimeRec})
   }).then(res => {
     if(res.ok){
       return res.json()

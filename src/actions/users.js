@@ -26,6 +26,61 @@ export const registerUser = user => dispatch => {
         });
 };
 
+
+
+
+export const ADD_LASTTEA = 'ADD_LASTTEA'; 
+export const addLastTea = (lastTea) => ({
+    type: ADD_LASTTEA, 
+    lastTea
+});
+
+export const LASTTEA_ERR = 'LASTTEA_ERR';
+const lastTeaErr = (err) => ({
+    type: LASTTEA_ERR,
+    err
+});
+
+// export const SET_TIMER = 'SET_TIMER'; 
+// export const setTimer = (timer) => ({
+//     type: SET_TIMER,
+//     timer
+// });
+
+export const ADD_VALS_ERR = 'ADD_VALS_ERR'; 
+export const addValsErr = (err) => ({
+    type: ADD_VALS_ERR,
+    err
+})
+
+
+
+
+export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dispatch, getState) => {
+    const state = getState();
+    console.log(state);
+    console.log(teaId);
+    console.log(teaType);
+    console.log(log);
+    return fetch(`${API_BASE_URL}/users/teas`, {
+        method: 'PUT', 
+        headers: {
+            'content-type':'application/json'
+        }, 
+        body: JSON.stringify({_id:state.auth.currentUser._id, teaId, teaType, log, spilled, rating, timer})
+ })
+}
+//  .then(res => {
+//         console.log("here is my response" + res);
+//         if(res.ok){
+//            return res.json();
+//         } else {
+//             return dispatch(addValsErr(res));
+//         }
+//     });
+// };
+
+
 export const addTeaToUser = teaType => (dispatch, getState) => {
     const state = getState();
     console.log(state);
@@ -44,51 +99,6 @@ export const addTeaToUser = teaType => (dispatch, getState) => {
     })
     .then((res) => { dispatch(addLastTea(res))
     })
-    .catch(err => dispatch(lastTeaErr(err)))
-    
+    .catch(err => dispatch(lastTeaErr(err))) 
 }; 
-
-
-
-export const ADD_LASTTEA = 'ADD_LASTTEA'; 
-export const addLastTea = (lastTea) => ({
-    type: ADD_LASTTEA, 
-    lastTea
-});
-
-export const LASTTEA_ERR = 'LASTTEA_ERR';
-const lastTeaErr = (err) => ({
-    type: LASTTEA_ERR,
-    err
-});
-
-export const SET_TIMER = 'SET_TIMER'; 
-export const setTimer = (timerInput) => ({
-    type: SET_TIMER,
-    timerInput
-});
-
-export const SET_TIME_LEFT = 'SET_TIME_LEFT';
-export const setTimeLeft = (timeLeft) => ({
-    type: SET_TIME_LEFT, 
-    timeLeft
-});
-
-
-
-
-
-export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dispatch, getState) => {
-    const state = getState();
-    console.log(state);
-    return fetch(`${API_BASE_URL}/users/teas`, {
-        method: 'PUT', 
-        headers: {
-            'content-type':'application/json'
-        }, 
-        body: JSON.stringify({_id:state.auth.currentUser._id, teaId, teaType, log, spilled, rating, timer})
-    }) 
-};
-
-
 

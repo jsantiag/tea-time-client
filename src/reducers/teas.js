@@ -4,7 +4,7 @@ import {
   FETCH_TEAS_ERROR,
   SHOW_MORE_INFO 
 } from '../actions/teas';
-import {ADD_LASTTEA,LASTTEA_ERR} from '../actions/users'; 
+import {ADD_LASTTEA,LASTTEA_ERR,ADD_VALS_ERR} from '../actions/users'; 
 
 const initialState = {
   teas: [],
@@ -58,6 +58,10 @@ export default function teasReducer(state = initialState, action) {
   }else if(action.type === 'resetCustom'){
     return Object.assign({}, state , {
       customOn:false
+    })
+  }else if(action.type === ADD_VALS_ERR){
+    return Object.assign({}, state, {
+      error: action.err
     })
   }
   return state;

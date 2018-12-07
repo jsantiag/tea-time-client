@@ -1,0 +1,175 @@
+.your-tea-list > ul{
+  width:100%;
+  margin: auto; 
+  padding:0;
+}
+
+.your-tea-list > ul > li {
+  width:80%; 
+  text-align: center;
+  cursor: pointer; 
+  height: 30%;
+  border: 1px solid black;
+  margin: auto;
+}
+
+.custom-creator, .customSubmit{
+  width:80%;
+  padding:15px;
+}
+.custom-submission{
+  width:90%;
+  text-align: center;
+  margin:auto;
+  /* padding-left:10%; */
+}
+.custom-submission > label, input {
+display:inline-block;
+padding:10px;
+}
+
+
+.create-new-tea{
+  padding-left:135px;
+  padding-top:20px;
+}
+.list-element-container {
+  padding: 15px;
+  border-left: 1px solid black;
+}
+.list-element-container > span, .tempRec , .steepRec, .tea-selector{
+  padding:10px;
+  width:100%;
+}
+
+.your-tea-list{
+  width:100%;
+}
+
+.your-tea-list{
+  text-align: center;
+  letter-spacing: 3px;
+}
+.tea-selector:hover{
+  cursor:pointer; 
+  background-color:#2e4c38;
+}
+
+/*ipads/tablets*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+
+  .your-tea-list > ul{
+    width:100%;
+    margin: auto; 
+    padding:0;
+  }
+  
+  .your-tea-list > ul > li {
+    width:80%; 
+    text-align: center;
+    cursor: pointer; 
+    height: 30%;
+    border: 1px solid black;
+    margin: auto;
+  }
+  
+  .custom-creator, .customSubmit{
+    width:80%;
+    padding:15px;
+  }
+  .custom-submission{
+    width:90%;
+    text-align: center;
+    margin:auto;
+    /* padding-left:10%; */
+  }
+  .custom-submission > label, input {
+  display:inline-block;
+  padding:10px;
+  }
+  .create-new-tea{
+    padding-left:135px;
+    padding-top:20px;
+  }
+  .list-element-container {
+    padding: 15px;
+    border-left: 1px solid black;
+  }
+  .list-element-container > span, .tempRec , .steepRec, .tea-selector{
+    padding:10px;
+    width:100%;
+  }
+  
+  .your-tea-list{
+    width:100%;
+  }
+  
+  .your-tea-list{
+    text-align: center;
+    letter-spacing: 3px;
+  }
+  
+.tea-selector:hover{
+   cursor:pointer; 
+   background-color:#2e4c38;
+ }
+
+}
+
+@media only screen and (max-width : 375px) {
+  .your-tea-list > ul{
+    width:100%;
+    margin: auto; 
+    padding:0;
+  }
+  
+  .your-tea-list > ul > li {
+    width:80%; 
+    text-align: center;
+    cursor: pointer; 
+    height: 30%;
+    border: 1px solid black;
+    margin: auto;
+  }
+  
+  .custom-creator, .customSubmit{
+    width:80%;
+    padding:15px;
+  }
+  .custom-submission{
+    width:90%;
+    text-align: center;
+    margin:auto;
+    /* padding-left:10%; */
+  }
+  .custom-submission > label, input {
+  display:inline-block;
+  padding:10px;
+  }
+  .create-new-tea{
+    padding-left:135px;
+    padding-top:20px;
+  }
+  .list-element-container {
+    padding: 15px;
+    border-left: 1px solid black;
+  }
+  .list-element-container > span, .tempRec , .steepRec, .tea-selector{
+    padding:10px;
+    width:100%;
+  }
+  
+  .your-tea-list{
+    width:100%;
+  }
+  
+  .your-tea-list{
+    text-align: center;
+    letter-spacing: 3px;
+  }
+  
+.tea-selector:hover{
+   cursor:pointer; 
+   background-color:#2e4c38;
+ }
+}
