@@ -4,9 +4,10 @@ import requiresLogin from './requires-login';
 import {fetchTeas} from '../actions/teas';
 import {addLastTea, addValsToUserTea} from '../actions/users';
 import PageVisibility from 'react-page-visibility';
-import './tea-timer.css'
-// const prettyMs = require('pretty-ms');
-
+import '../css/tea-timer.css';
+import spilledPic from '../imgFiles/spilled';
+import unspilledPic from '../imgFiles/unspilled';
+import TeaLogForm from './log-form';
 export class TeaTimer extends React.Component {
 constructor(props) {
     super(props);
@@ -15,6 +16,8 @@ constructor(props) {
       timeLeft: null, 
       spilled:false, 
       timerInputField:true,
+      log:null,
+      rating:null
     };
     this.startTimer = this.startTimer.bind(this);
     this.setTimeOutFunc = null; 
@@ -28,7 +31,6 @@ constructor(props) {
 
   onSubmit(event){
     event.preventDefault();
-    console.log(this.input.value);
     this.setState({
       timeLeft: (parseFloat(this.input.value)*60),
       timer:(parseFloat(this.input.value)), 
@@ -38,7 +40,6 @@ constructor(props) {
 
   
   startTimer(){
-    console.log(this.state);
     let self = this; 
     self.setTimeOutFunc = setTimeout(()=>{
       let seconds = self.state.timeLeft - 1;
@@ -88,12 +89,10 @@ submitVals(){
   let teaType = this.props.lastTea.lastTea.teaType;
   let spilled = this.state.spilled; 
   let timer = this.state.timer;
-  let log = 'such great tea wow';
-  let rating = 4;
+  let log = this.state.log;
+  let rating = this.state.rating;
 
-    console.log('this is submit vals')
   this.props.dispatch(addValsToUserTea(teaId, teaType, log, spilled, rating, timer)); 
-  console.log(`props post put dispatch` + this.props);
   };
 }
 
@@ -101,31 +100,25 @@ handleVisibilityChange= () => {
   this.setState({
     spilled: true
   });
-  console.log('spilled');
 }
-
-// let self = this;
-//  self.setState{
-//    spillCount: self.state.spillCount + 1
-//  }
-// }
-
 
 render(){
   
   if(this.state.timeLeft === 0){
     this.submitVals();
     clearTimeout(this.setTimeOutFunc);
-    console.log(this.state);
   }
 
 
 return (
     <PageVisibility onChange={this.handleVisibilityChange}>
      <div className="current-user-tea">
-      <h2>Selected Tea: {(this.props.lastTea)? this.props.lastTea.lastTea.teaType : ''}</h2>
-        <h3> Recommended Steep Temp: {((this.props.lastTea)? (this.tempRecsLookUp(this.props.lastTea.lastTea.teaType)) : 'no rec for this custom tea')} </h3>
-        <h3> Recommended Steep Time:  {((this.props.lastTea)? (this.steepRecsLookUp(this.props.lastTea.lastTea.teaType)) : '')} </h3>
+      <h2>Selected Tea: {(this.props.lastTea)?
+         this.props.lastTea.lastTea.teaType : ''}</h2>
+        <h3> Recommended Steep Temp: {((this.props.lastTea)?
+           (this.tempRecsLookUp(this.props.lastTea.lastTea.teaType)) : 'no temp rec for this tea')} </h3>
+        <h3> Recommended Steep Time:  {((this.props.lastTea)? 
+          (this.steepRecsLookUp(this.props.lastTea.lastTea.teaType)) : 'no steep rec for this tea')} </h3>
          {(this.state.timeLeft === 0 && this.state.timer !== null)?
           '' :<form onSubmit={e => this.onSubmit(e)}>
           {(this.state.timerInputField === false)? '' :
@@ -148,27 +141,33 @@ return (
             id="guessButton" 
             className="button">start timer</button> </div>}
           </form>}
-          {(this.state.timeLeft === 0 && this.state.timerInputField === false && this.state.spilled === true)? <h4>You spilled your tea earlier, but your real brew is all done now! Enjoy your tea and better luck with disconnecting during your steep break next time! :) </h4> : '' }
-         <div>{(this.state.timeLeft > 0)? <h3>Time Left: {this.state.timeLeft}</h3>:''}</div>
-         {(this.state.timeLeft > 0 && this.state.spilled === true)? <div className='spill-image'><p>Oh no! You spilled your tea!</p><img src='https://lh3.googleusercontent.com/xjX9sbz1Tog--FH2lWKLTlh2gDxDOfR8If0Tbc3cJ_f9z6EAyRpncz0fPQ-MLLrQy6_eiegHyS0M4a47lsvtR0_ngxNRfuaGtN8BGv5ghMouRYSB6kXkpQNfztDBx7l3NFCIap9ERQ=w2400' alt="broody digital drawing of spilled cup of tea"/></div>:<div className="unspilled-tea"><img alt="full and upright cup of tea, good job!"src='https://lh3.googleusercontent.com/JRO4dmIJOGr4ojCTIcrdS38xBHGjsieD4VgB97Lu1lEK3akydta1kKwqnX0L_EXie1BOCBPteKAftpKJZSaZRuye9iF2v1RLqmK1m5zfrBRbbuXYryAWwdIm3IulOa6K30yDVY_TXw=w2400' /></div>}
-         {(this.state.timeLeft === 0 && this.state.timerInputField === false && this.state.spilled === true)? <h4>You spilled your tea earlier, but your real brew is all done now! Enjoy your tea and better luck with disconnecting during your steep break next time! :) </h4> : '' }
+          {(this.state.timeLeft === 0 && this.state.timerInputField === false && this.state.spilled === true)?
+             <p className="enjoy-your-tea-spill">You spilled your tea earlier, but your real brew is all done now!
+                Enjoy your tea and better luck with disconnecting during your steep break next time! :) </p>
+                : ''}
+
+        {(this.state.timeLeft === 0 && this.state.timerInputField === false)? <div className="log-container"><TeaLogForm/></div>:''}
+         <div>{(this.state.timeLeft > 0)? 
+         <h3>Time Left: {this.state.timeLeft}</h3>:''}
+         </div>
+         {(this.state.timeLeft > 0 && this.state.spilled === true)?
+           <div className='spill-image'><p>Oh no! You spilled your tea!</p>
+           <img src={spilledPic} alt="broody digital drawing of spilled cup of tea"/>
+           </div>:
+           <div className="unspilled-tea"><img alt="full and upright cup of tea, good job!"src={unspilledPic} />
+           </div>}
       </div>
     </PageVisibility>
     );
-
   }
 }
-
-// const mapDispatchToProps = dispatch =>{
-
-// }
 
 const mapStateToProps = state => {
   // const {currentUser} = state.auth;
   return {
     teas: state.teasReducer.teas, 
     lastTea: state.teasReducer.lastTea, 
-    // timer: state.timerReducer.timer
+
   };
 };
 

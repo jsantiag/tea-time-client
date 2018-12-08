@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchTeas, showMoreInfo, addCustomToTeaList} from '../actions/teas';
 import { addTeaToUser } from '../actions/users';
-import './tea-list.css'
+import '../css/tea-list.css'
 
 export class TeaList extends React.Component {
 
@@ -42,22 +42,16 @@ export class TeaList extends React.Component {
     }
 
     timerRedirect(teaType){
-        console.log(teaType);
         this.props.dispatch(addTeaToUser(teaType));
-        // return <Redirect to="/tea-timer" />;(this works only within render());
         this.props.history.push('/tea-timer'); 
     }
 
     handleCustomClick(){
-        console.log('handleCustomClick triggered');
         this.props.dispatch({type:'setCustom'});
     }
 
     handleSaveCustom(event){
         event.preventDefault();
-        console.log(this.tea.value);
-        console.log(this.steep.value);
-        console.log(this.temp.value);
         this.props.dispatch(addCustomToTeaList(this.tea.value,this.temp.value,this.steep.value));
         this.props.dispatch({type: 'resetCustom'}); 
     }

@@ -21,7 +21,6 @@ export default function teasReducer(state = initialState, action) {
           error: null
       });
   } else if (action.type === FETCH_TEAS_SUCCESS) {
-      console.log(action.teas);
     return Object.assign({}, state, {
         loading: false,
         error: null,
@@ -34,7 +33,6 @@ export default function teasReducer(state = initialState, action) {
   } else if(action.type === SHOW_MORE_INFO){
     return Object.assign({}, state, {
       teas: state.teas.map(tea => {
-          console.log(tea._id, action.teaId);
         if(tea.id === action.teaId){
             return Object.assign({}, tea, {moreInfo: true});
         } else {
@@ -51,7 +49,6 @@ export default function teasReducer(state = initialState, action) {
       error: action.err
     })
   }else if(action.type === 'setCustom'){
-    console.log('action recieved in reducer');
     return Object.assign({}, state, {
       customOn:true
     })

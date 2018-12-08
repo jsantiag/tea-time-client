@@ -1,0 +1,3 @@
+
+const spilledPic = 'https://lh3.googleusercontent.com/xjX9sbz1Tog--FH2lWKLTlh2gDxDOfR8If0Tbc3cJ_f9z6EAyRpncz0fPQ-MLLrQy6_eiegHyS0M4a47lsvtR0_ngxNRfuaGtN8BGv5ghMouRYSB6kXkpQNfztDBx7l3NFCIap9ERQ=w2400';
+export default spilledPic; 

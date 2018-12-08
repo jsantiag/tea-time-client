@@ -58,10 +58,6 @@ export const addValsErr = (err) => ({
 
 export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dispatch, getState) => {
     const state = getState();
-    console.log(state);
-    console.log(teaId);
-    console.log(teaType);
-    console.log(log);
     return fetch(`${API_BASE_URL}/users/teas`, {
         method: 'PUT', 
         headers: {
@@ -71,7 +67,6 @@ export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dis
  })
 }
 //  .then(res => {
-//         console.log("here is my response" + res);
 //         if(res.ok){
 //            return res.json();
 //         } else {
@@ -83,7 +78,6 @@ export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dis
 
 export const addTeaToUser = teaType => (dispatch, getState) => {
     const state = getState();
-    console.log(state);
     return fetch(`${API_BASE_URL}/users/teas`, {
         method: 'POST',
         headers: {
@@ -102,3 +96,14 @@ export const addTeaToUser = teaType => (dispatch, getState) => {
     .catch(err => dispatch(lastTeaErr(err))) 
 }; 
 
+
+// export const returnUser = _id => (dispatch, getState)=>{
+//     const state = getState(); 
+//     return fetch(`${API_BASE_URL}/users/:id`, {
+//         method: 'GET',
+//         headers: {
+//             'content-type':'application/json'
+//         }, 
+//         body: JSON.stringify({_id:state.auth.currentUser._id})
+//     })
+// }

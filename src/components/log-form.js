@@ -1,42 +1,40 @@
-// import React from 'react'; 
-// import {connect} from 'react-redux'; 
-// import { TeaLog } from './tea-log';
+import React from 'react'; 
 
-// export function TeaLogForm(props) {
+export class TeaLogForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      log:null,
+      rating:null
+    }
+  }
+  
+    handleSubmit(){
+      this.setState({
+        log:this.note.value,
+        rating:this.rating.value
+      })
+    }
 
-//   return (
-//     <div className="log-form-wrapper"> 
-//     <form className="log-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-//         <label><h2>Rate your brew:</h2></label>
-//         <field 
-//         name="rate" 
-//         id="rate" 
-//         type="select" 
-//         component="select"
-//         >
-//           <option value="5">
-//             5 stars, best tea yet
-//           </option>
-//           <option value="4">
-//             4 stars, very good tea
-//           </option>
-//           <option value="3">
-//             3 stars, pretty good tea
-//           </option>
-//           <option value="2">
-//             2 stars, not great and not terrible
-//           </option>
-//           <option value="1">
-//             1 star, terrible tea
-//           </option>
-//         </field>
-//         <label><h2>Notes about your brew:</h2></label>
-//         <field name="description" type="text" id="description" component="input"/>
-//         <br></br>
-//         <button type="submit disabled={this.props.pristine || this.props.submitting}">Save your tea log</button>
-//       </form> 
-//     </div>
-//     );
-// }
+  render(){
 
-// export default function(TeaLogForm)
+  
+
+  return (
+    <div className="log-form-wrapper"> 
+    <form className="log-form" onSubmit={e => this.handlesubmit()}>
+        <label><h2>Rate your brew with a number 1-4:</h2></label>
+        <input className="rating-val" type='number' required ref={input => (this.rating = input) }></input>
+        <label><h2>Notes about your brew:</h2></label>
+        <textarea id="tea_comments" name="tea_comments" rows="10" cols="35" ref={input => (this.note = input)}>
+        </textarea>
+        <br></br>
+        <button type="submit">Save your tea log</button>
+      </form> 
+    </div>
+    );
+  }
+  }
+
+export default(TeaLogForm);
+
