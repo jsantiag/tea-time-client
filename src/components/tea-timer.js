@@ -2,22 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchTeas} from '../actions/teas';
-import {addLastTea, addValsToUserTea} from '../actions/users';
+import {addLastTea, addValsToUserTea, addTimer} from '../actions/users';
 import PageVisibility from 'react-page-visibility';
 import '../css/tea-timer.css';
 import spilledPic from '../imgFiles/spilled';
 import unspilledPic from '../imgFiles/unspilled';
 import TeaLogForm from './log-form';
+
 export class TeaTimer extends React.Component {
 constructor(props) {
     super(props);
     this.state = {
-      timer: null,
       timeLeft: null, 
-      spilled:false, 
-      timerInputField:true,
-      log:null,
-      rating:null
+      timerInputField:true
     };
     this.startTimer = this.startTimer.bind(this);
     this.setTimeOutFunc = null; 
@@ -29,11 +26,13 @@ constructor(props) {
     this.props.dispatch(addLastTea()); 
   }
 
+  
   onSubmit(event){
     event.preventDefault();
+    let timer = (parseFloat(this.input.value)*60);
+    this.props.dispatch(addTimer(timer));
     this.setState({
       timeLeft: (parseFloat(this.input.value)*60),
-      timer:(parseFloat(this.input.value)), 
       timerInputField:false
     },() => this.startTimer())
   }
@@ -83,17 +82,27 @@ steepRecsLookUp(currentTeaType){
   }
 }
 
-submitVals(){
+handlesubmitVals(e){
+  e.preventDefault();
   if (this.props.lastTea){
   let teaId = this.props.lastTea.lastTea._id; 
   let teaType = this.props.lastTea.lastTea.teaType;
+  let timer = this.props.timer; 
+  let log = e.target.tea_comments.value;
   let spilled = this.state.spilled; 
-  let timer = this.state.timer;
-  let log = this.state.log;
-  let rating = this.state.rating;
-
-  this.props.dispatch(addValsToUserTea(teaId, teaType, log, spilled, rating, timer)); 
+  let rating= e.target.ratingVal.value;
+  this.props.dispatch(addValsToUserTea(teaId, teaType, timer, log, spilled, rating)); 
+  this.props.history.push('/tea-list'); 
   };
+}
+submitVals(){
+  if(this.props.lastTea){
+    let teaId = this.props.lastTea.lastTea._id; 
+    let teaType = this.props.lastTea.lastTea.teatype; 
+    let timer = this.props.timer; 
+
+    this.props.dispatch(addValsToUserTea(teaId, teaType, timer));
+  }
 }
 
 handleVisibilityChange= () => {
@@ -102,13 +111,15 @@ handleVisibilityChange= () => {
   });
 }
 
-render(){
-  
-  if(this.state.timeLeft === 0){
+componentDidUpdate(){
+   if( this.state.timeLeft === 0){
     this.submitVals();
-    clearTimeout(this.setTimeOutFunc);
+  clearTimeout(this.setTimeOutFunc);
   }
+}
 
+render(){
+ 
 
 return (
     <PageVisibility onChange={this.handleVisibilityChange}>
@@ -146,7 +157,7 @@ return (
                 Enjoy your tea and better luck with disconnecting during your steep break next time! :) </p>
                 : ''}
 
-        {(this.state.timeLeft === 0 && this.state.timerInputField === false)? <div className="log-container"><TeaLogForm/></div>:''}
+        {(this.state.timeLeft === 0 && this.state.timerInputField === false)? <div className="log-container"><TeaLogForm handleSubmit={(e) => this.handlesubmitVals(e)}  /></div>:''}
          <div>{(this.state.timeLeft > 0)? 
          <h3>Time Left: {this.state.timeLeft}</h3>:''}
          </div>
@@ -160,6 +171,7 @@ return (
     </PageVisibility>
     );
   }
+
 }
 
 const mapStateToProps = state => {
@@ -167,13 +179,17 @@ const mapStateToProps = state => {
   return {
     teas: state.teasReducer.teas, 
     lastTea: state.teasReducer.lastTea, 
-
+    vals: state.teasReducer.vals,
+    timer: state.teasReducer.timer
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  addValsToUserTea: (teaId, teaType, spilled, timer) => dispatch(addValsToUserTea(teaId, teaType, spilled, timer))
+  addValsToUserTea: (teaId, teaType, spilled, timer) => dispatch(addValsToUserTea(teaId, teaType, spilled, timer)),
+  addTimer:(timer) => dispatch(addTimer(timer))
 });
+
+
 
 export default requiresLogin()(connect(mapStateToProps, mapDispatchToProps)(TeaTimer));
 

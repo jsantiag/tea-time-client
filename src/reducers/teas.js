@@ -4,14 +4,16 @@ import {
   FETCH_TEAS_ERROR,
   SHOW_MORE_INFO 
 } from '../actions/teas';
-import {ADD_LASTTEA,LASTTEA_ERR,ADD_VALS_ERR} from '../actions/users'; 
+import {ADD_LASTTEA,LASTTEA_ERR,ADD_VALS_ERR, ADD_VALS, ADD_TIMER} from '../actions/users'; 
 
 const initialState = {
   teas: [],
   loading: false,
   error: null,
   lastTea: null, 
-  customOn: false
+  customOn: false, 
+  vals: null,
+  timer: null
 };
 
 export default function teasReducer(state = initialState, action) {
@@ -59,6 +61,14 @@ export default function teasReducer(state = initialState, action) {
   }else if(action.type === ADD_VALS_ERR){
     return Object.assign({}, state, {
       error: action.err
+    })
+  }else if(action.type === ADD_VALS){
+    return Object.assign({}, state, {
+      vals: action.vals
+    })
+  }else if(action.type === ADD_TIMER){
+    return Object.assign({}, state, {
+      timer: action.timer
     })
   }
   return state;

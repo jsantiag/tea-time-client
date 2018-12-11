@@ -27,8 +27,6 @@ export const registerUser = user => dispatch => {
 };
 
 
-
-
 export const ADD_LASTTEA = 'ADD_LASTTEA'; 
 export const addLastTea = (lastTea) => ({
     type: ADD_LASTTEA, 
@@ -41,11 +39,11 @@ const lastTeaErr = (err) => ({
     err
 });
 
-// export const SET_TIMER = 'SET_TIMER'; 
-// export const setTimer = (timer) => ({
-//     type: SET_TIMER,
-//     timer
-// });
+export const ADD_VALS ='ADD_VALS'; 
+export const addVals = (vals) => ({
+    type: ADD_VALS, 
+    vals
+})
 
 export const ADD_VALS_ERR = 'ADD_VALS_ERR'; 
 export const addValsErr = (err) => ({
@@ -53,27 +51,37 @@ export const addValsErr = (err) => ({
     err
 })
 
+export const ADD_TIMER = 'ADD_TIMER'; 
+export const addTimer = (timer) => ({
+    type: ADD_TIMER, 
+    timer
+})
 
 
 
-export const addValsToUserTea = (teaId,teaType,log,spilled,rating,timer) => (dispatch, getState) => {
+
+
+
+export const addValsToUserTea = (teaId,teaType,timer,log,spilled,rating) => (dispatch, getState) => {
+    dispatch(addVals(teaId,teaType,timer,log,spilled,rating));
     const state = getState();
     return fetch(`${API_BASE_URL}/users/teas`, {
         method: 'PUT', 
         headers: {
             'content-type':'application/json'
         }, 
-        body: JSON.stringify({_id:state.auth.currentUser._id, teaId, teaType, log, spilled, rating, timer})
- })
+        body: JSON.stringify({_id:state.auth.currentUser._id, teaId,teaType,timer,log,spilled,rating })
+    }).then(res => {
+        if(res.ok){    
+            console.log(res);
+            console.log(this.state.vals);
+            return res.json()
+        } else {
+            return dispatch(addValsErr(res))
+        }
+    }).catch(err=>dispatch(addValsErr(err)));
 }
-//  .then(res => {
-//         if(res.ok){
-//            return res.json();
-//         } else {
-//             return dispatch(addValsErr(res));
-//         }
-//     });
-// };
+
 
 
 export const addTeaToUser = teaType => (dispatch, getState) => {
@@ -96,14 +104,3 @@ export const addTeaToUser = teaType => (dispatch, getState) => {
     .catch(err => dispatch(lastTeaErr(err))) 
 }; 
 
-
-// export const returnUser = _id => (dispatch, getState)=>{
-//     const state = getState(); 
-//     return fetch(`${API_BASE_URL}/users/:id`, {
-//         method: 'GET',
-//         headers: {
-//             'content-type':'application/json'
-//         }, 
-//         body: JSON.stringify({_id:state.auth.currentUser._id})
-//     })
-// }
