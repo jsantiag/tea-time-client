@@ -1,0 +1,13 @@
+.text-container-div{
+  width:70%; 
+  margin:auto; 
+  text-align: center; 
+  line-height: 1.1; 
+}
+
+
+
+.more-info-text{
+ white-space: pre-line; 
+ color: #2e4c38;
+}

@@ -13,7 +13,8 @@ const initialState = {
   lastTea: null, 
   customOn: false, 
   vals: null,
-  timer: null
+  timer: null 
+  // userTeas:[]
 };
 
 export default function teasReducer(state = initialState, action) {
@@ -71,6 +72,19 @@ export default function teasReducer(state = initialState, action) {
       timer: action.timer
     })
   }
+  // }else if(action.type === MOST_RECENT){
+  //   return Object.assign({},state, {
+  //     userTeas: (state.auth.currentUser.teas).map(tea => {
+  //         if(tea.teaType === action.teaType){
+  //           return Object.assign({}, tea, {mostRecent:true});
+  //           }else{
+  //            return Object.assign({}, tea, {mostRecent:false})
+  //           }
+  //           })
+  //   })
+  // }
+//want to take mostRecentTea by teaType and assign it to UserTeas
+
   return state;
 }
 

@@ -6,10 +6,11 @@ import LoginForm from './login-form';
 import unspilledPic from '../imgFiles/unspilled'
 
 export function LandingPage(props) {
-    // If we are logged in redirect straight to the user's tealist
     if (props.loggedIn) {
         return <Redirect to="/tea-list" />;
     }
+
+
 
     return (
         <div className="home">

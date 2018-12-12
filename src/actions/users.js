@@ -57,7 +57,11 @@ export const addTimer = (timer) => ({
     timer
 })
 
-
+// export const MOST_RECENT = 'MOST_RECENT'; 
+// export const mostRecent = (teaType) => ({
+//     type: MOST_RECENT, 
+//     teaType
+// })
 
 
 
@@ -103,4 +107,5 @@ export const addTeaToUser = teaType => (dispatch, getState) => {
     })
     .catch(err => dispatch(lastTeaErr(err))) 
 }; 
+
 
