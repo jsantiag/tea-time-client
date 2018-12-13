@@ -10,7 +10,7 @@ export class TeaList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          mostRecentBrew:null 
+          mostRecentBrew:null
         };
       
       }
@@ -91,10 +91,10 @@ export class TeaList extends React.Component {
                 this.moreUserTeaInfo(tea.teaType)}}>{tea.teaType}</span></h3>
                 {tea.moreInfo && <div className="tempRec"> Recommended steep temperature:{this.steepTempLookup(tea.tempRec)}</div>}
                 {tea.moreInfo && <div className="steepRec">Recommended steep time:{this.steepRecLookup(tea.steepTimeRec)}</div>}
-                {(this.state.mostRecentBrew && this.state.mostRecentBrew.teaType === tea.teaType)? <div className="mostRecent">Most recent brew rating:{this.state.mostRecentBrew.rating}</div>:''}
+                {tea.moreInfo? <div className='recentWrapper'>{(this.state.mostRecentBrew && this.state.mostRecentBrew.teaType === tea.teaType)? <div className="mostRecent">Most recent brew rating:{this.state.mostRecentBrew.rating}</div>:''}
                 {(this.state.mostRecentBrew && this.state.mostRecentBrew.teaType === tea.teaType && this.state.mostRecentBrew.log !== undefined)?<div className="mostRecent">Most recent brew notes:{this.state.mostRecentBrew.log}</div>:''}
                 {(this.state.mostRecentBrew && this.state.mostRecentBrew.teaType === tea.teaType && this.state.mostRecentBrew.timer !== undefined)?<div className="mostRecent">Most recent steep time:{this.state.mostRecentBrew.timer}</div>:''}
-                {tea.moreInfo && <button className="tea-selector"onClick={e => this.timerRedirect(tea.teaType)}>select this tea</button>}
+                {tea.moreInfo && <button className="tea-selector"onClick={e => this.timerRedirect(tea.teaType)}>select this tea</button>}</div>:''}
                 </div>
              </li>
        
