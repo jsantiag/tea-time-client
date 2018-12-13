@@ -15,11 +15,14 @@
   max-width: 100%; 
   width: auto;
   height: auto;
-  top: 0;  
+  /* top: 0;  
   bottom: 0;  
   left: 0;  
-  right: 0;  
+  right: 0;   */
+  position: static;
+  object-position: 50% 50%;
   margin: auto;
+  padding-bottom: 300px;
   z-index: -10;
 }
 
