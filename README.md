@@ -24,7 +24,7 @@ while getting ever closer to your perfect brew.
 ##### landing page 
 <img src="screencaps/tea-time-landing.JPG" width="450">
 
-##### tea-list 
+##### tea list 
 <img src="screencaps/tea-time-select.JPG" width="450">
 
 ##### timer page
