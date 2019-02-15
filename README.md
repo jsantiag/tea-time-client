@@ -2,6 +2,8 @@
 
 This project was bootstrapped with Create React App.
 
+### check out this <a href="https://gist.github.com/jsantiag/a6fc75d903bba0637c20f542ca374356.js">public gist<a/> for api docs
+
 ## Tea-Time :tea:
 Tea-time is a tool for tea drinkers to perfect their brew of choice whilst practicing mindfulness and 
 impulse control. 
