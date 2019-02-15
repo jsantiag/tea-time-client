@@ -49,6 +49,7 @@ export class LoginForm extends React.Component {
                     validate={[required, nonEmpty]}
                 />
                 </div>
+                <div className="demo account"><p>Use this demo account to try out the app: username:greentea, password:bestteaever</p></div>
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Log in
                 </button>
